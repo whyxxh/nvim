@@ -1,0 +1,1 @@
+require("colorscheme.pax").setup()
