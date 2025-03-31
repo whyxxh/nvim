@@ -3,6 +3,7 @@ vim.keymap.set('n', '<leader>ff', ':Telescope find_files<CR>' )
 vim.keymap.set('n', '<leader>fg', ':Telescope live_grep<CR>')
 vim.keymap.set('n', '<leader>fb', ':Telescope buffers<CR>')
 vim.keymap.set('n', '<leader>fc', ':Telescope colorscheme<CR>')
+vim.keymap.set('n', '<leader>fn', ':Telescope notify<CR>')
 
 -- NvimTree
 vim.keymap.set('n', '<leader>e', ':NvimTreeOpen<CR>')

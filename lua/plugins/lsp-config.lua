@@ -3,7 +3,7 @@ return {
         "williamboman/mason.nvim",
         config = function()
             require("mason").setup()
-        end 
+        end
     },
 
     {
@@ -38,7 +38,6 @@ return {
             lspconfig.pyright.setup{ capabilities = capabilities, }
             lspconfig.texlab.setup{ capabilities = capabilities, }
             lspconfig.marksman.setup{}
-            lspconfig.glsl_analyzer.setup{}
 
             local hover_opts = {
                 border = {

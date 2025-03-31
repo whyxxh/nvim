@@ -2,7 +2,7 @@ require "config.options"
 require "config.keymaps"
 require "config.lazy"
 require "config.autocmds"
-require "config.custom_scripts.neorg_to_pdf"
+require "config.lsp"
 
 -- Register the :cpdf command
 vim.api.nvim_create_user_command('Cpdf', function()

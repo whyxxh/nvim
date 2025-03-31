@@ -1,5 +1,4 @@
 
-
 vim.api.nvim_create_autocmd("FileType", {
     pattern = { "norg", "markdown", "tex" },
     callback = function()
