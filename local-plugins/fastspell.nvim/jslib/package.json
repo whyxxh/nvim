@@ -1,0 +1,20 @@
+{
+  "name": "cspell-test",
+  "main": "main.ts",
+  "scripts": {
+    "start": "node dist/src/main.js",
+    "dev": "node dist/src/main.js",
+    "predev": "npm run build", 
+    "build": "tsc"
+  },
+  "type": "module",
+  "dependencies": {
+    "cspell-lib": "^8.17.5"
+  },
+  "devDependencies": {
+    "@types/node": "^22.13.5",
+    "@types/webpack": "^5.28.5",
+    "ts-loader": "^9.5.2",
+    "typescript": "^5.7.3"
+  }
+}
