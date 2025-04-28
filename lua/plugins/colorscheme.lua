@@ -6,19 +6,19 @@ local opts = {
         -- title = { bold = true, fg = "#ff0000" },
     },
 
-    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" }),
+    -- markdown
     vim.api.nvim_set_hl(0, "RenderMarkdownCode", { link = "BlinkCmpCursorLineMenuHack" }),
-
-    vim.api.nvim_set_hl(0, "WhichKeyNormal", { link = "Normal" }),
-    vim.api.nvim_set_hl(0, "WhichKeyBorder", { link = "Normal" }),
-
-    vim.api.nvim_set_hl(0, "DiagnosticError", {link = "Error"}),
-    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" } ),
-
     vim.api.nvim_set_hl(0, "RenderMarkdownBullet", { link = "DiagnosticInfo" }),
+    vim.api.nvim_set_hl(0, "RenderMarkdownChecked", { link = "DiagnosticInfo" }),
     vim.api.nvim_set_hl(0, "@markup.list", { link = "DiagnosticInfo" }),
     vim.api.nvim_set_hl(0, "@markup.strong", { link = "markdownBold" }),
-    vim.api.nvim_set_hl(0, "RenderMarkdownChecked", { link = "DiagnosticInfo" }),
+
+    -- other
+    vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" }),
+    vim.api.nvim_set_hl(0, "WhichKeyNormal", { link = "Normal" }),
+    vim.api.nvim_set_hl(0, "WhichKeyBorder", { link = "Normal" }),
+    vim.api.nvim_set_hl(0, "DiagnosticError", {link = "Error"}),
+    vim.api.nvim_set_hl(0, "FloatBorder", { link = "Normal" } ),
 }
 
 local function config()
