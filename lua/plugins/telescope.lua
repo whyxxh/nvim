@@ -17,8 +17,8 @@ return {
                         width = 0.7,
                         height = 0.7,
                     },
-                    prompt_prefix = "   ", -- Sets the magnifying glass icon
-                    selection_caret = "|> ", -- Sets the arrow icon for selected item
+                    prompt_prefix = " * ", -- Sets the magnifying glass icon
+                    selection_caret = " > ", -- Sets the arrow icon for selected item
                 },
                 -- Extensions (fzf)
                 extensions = {
