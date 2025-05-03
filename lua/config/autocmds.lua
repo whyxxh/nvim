@@ -9,6 +9,13 @@ vim.api.nvim_create_autocmd("FileType", {
     end
 })
 
+vim.api.nvim_create_autocmd({"BufEnter", "BufWinEnter"}, {
+    pattern = "*.c",
+    callback = function()
+        vim.fn.matchadd('Error', [[\%>80c]])
+    end,
+})
+
 local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end

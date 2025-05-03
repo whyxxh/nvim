@@ -1,8 +1,10 @@
 vim.g.mapleader = " "
+
 vim.keymap.set('n', '<leader>bn', ':bn')
 vim.g.maplocalleader = " "
 
 vim.o.clipboard = "unnamedplus"
+vim.o.mouse = ""
 
 vim.o.cursorline = false
 vim.o.number = true
