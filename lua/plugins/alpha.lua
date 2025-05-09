@@ -7,12 +7,24 @@ return {
         opts = function()
             local dashboard = require("alpha.themes.dashboard")
 
+            local uID = string.format("0x%x", math.random(0, 0xFFFFFF))
+
+            dashboard.section.header.val = {
+                [[ +---------------------------------+ ]],
+                [[ | > NEOVIM v0.11.0                | ]],
+                [[ | [ OK ] PREPARING ENVIRONMENT... | ]],
+                [[ | [ OK ] ENVIRONMENT READY.       | ]],
+                [[ | uID: ]] .. uID .. [[                   | ]],-- Display the unique uID here
+                [[ +---------------------------------+ ]],
+                [[            Welcome uRubs            ]],
+            }
+
             dashboard.section.buttons.val = {
-                dashboard.button("f", "  " .. " Find file",       "<cmd> Telescope find_files <cr>"),
-                dashboard.button("n", "  " .. " New file",        "<cmd> ene <BAR> startinsert <cr>"),
-                dashboard.button("r", "  " .. " Recent files",    "<cmd> Telescope oldfiles <cr>"),
-                dashboard.button("s", "  " .. " Restore Session", [[<cmd> lua require("persistence").load() <cr>]]),
-                dashboard.button("q", "  " .. " Quit",            "<cmd> qa <cr>"),
+                dashboard.button("f", "  [ F ] Find file",       "<cmd> Telescope find_files <cr>"),
+                dashboard.button("n", "  [ N ] New file",        "<cmd> ene <BAR> startinsert <cr>"),
+                dashboard.button("g", "  [ G ] Grep files",    "<cmd> Telescope live_grep <cr>"),
+                dashboard.button("s", "  [ S ] Restore Session", "<cmd> lua require('persistence').load() <cr>"),
+                dashboard.button("q", "  [ Q ] Quit",            "<cmd> qa <cr>"),
             }
 
             for _, button in ipairs(dashboard.section.buttons.val) do
@@ -24,9 +36,9 @@ return {
             dashboard.section.buttons.opts.hl = "AlphaButtons"
             dashboard.section.footer.opts.hl = "AlphaFooter"
 
-            -- Adjust the layout to position the dashboard higher
+
             dashboard.opts.layout = {
-                { type = "padding", val = 3 }, -- Adjust this value to control vertical spacing
+                { type = "padding", val = 4 },  -- Increased space for retro feel
                 dashboard.section.header,
                 { type = "padding", val = 2 },
                 dashboard.section.buttons,
@@ -57,13 +69,13 @@ return {
                 callback = function()
                     local stats = require("lazy").stats()
                     local ms = (math.floor(stats.startuptime * 100 + 0.5) / 100)
-                    dashboard.section.footer.val = "⚡ Neovim loaded "
+                    dashboard.section.footer.val = "]] LOADED "
                     .. stats.loaded
                     .. "/"
                     .. stats.count
-                    .. " plugins in "
+                    .. " PLUGINS IN "
                     .. ms
-                    .. "ms"
+                    .. "ms "
                     pcall(vim.cmd.AlphaRedraw)
                 end,
             })
