@@ -1,12 +1,19 @@
 return {
     {
+        "jakewvincent/mkdnflow.nvim",
+        config = function()
+            require('mkdnflow').setup({
+            })
+        end
+    },
+    {
         'MeanderingProgrammer/render-markdown.nvim',
         dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.nvim' }, -- if you use the mini.nvim suite
         ---@module 'render-markdown'
         ---@type render.md.UserConfig
         opts = {
             heading = {
-                icons = { '1* ', '2* ', '3* ', '4* ', '5* ', '6* ' },
+                icons = { '* ', '2* ', '3* ', '4* ', '5* ', '6* ' },
                 backgrounds = {
                 },
             },
@@ -63,23 +70,4 @@ return {
             })
         end
     },
-    {
-        "obsidian-nvim/obsidian.nvim",
-        version = "*", -- recommended, use latest release instead of latest commit
-        ft = "markdown",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-        },
-        opts = {
-            workspaces = {
-                {
-                    name = "personal",
-                    path = "~/vaults/perso",
-                },
-            },
-            ui = {
-                enable = false,
-            }
-        },
-    }
 }

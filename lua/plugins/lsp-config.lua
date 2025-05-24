@@ -24,7 +24,7 @@ return {
                 -- Customize clangd setup separately
                 if server_name == "clangd" then
                     opts.init_options = {
-                        fallbackFlags = {'--std=c99', '-xc'}
+                        fallbackFlags = {'--std=c99', '-xc', '-Wall', '-Wunused-variables', '-Wunused-functions'}
                     }
                 end
 
