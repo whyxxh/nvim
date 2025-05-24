@@ -1,37 +1,42 @@
+-- Leader keys
 vim.g.mapleader = " "
-
-vim.keymap.set('n', '<leader>bn', ':bn')
 vim.g.maplocalleader = " "
 
-vim.o.clipboard = "unnamedplus"
-vim.o.mouse = ""
+-- Clipboard and mouse behavior
+vim.o.clipboard = "unnamedplus"  -- Use system clipboard
+vim.o.mouse = ""                 -- Disable mouse support
 
-vim.o.cursorline = false
-vim.o.number = true
-vim.o.relativenumber = true
+-- Cursor and line numbers
+vim.o.cursorline = false         -- Don't highlight current line
+vim.o.number = true              -- Show absolute line numbers
+vim.o.relativenumber = true      -- Show relative line numbers
 
-vim.o.signcolumn = "yes"
-vim.cmd("hi! link SignColumn Normal")
-vim.diagnostic.config({ signs = false })
+-- Sign column and diagnostics
+vim.o.signcolumn = "yes"                     -- Always show sign column
+vim.cmd("hi! link SignColumn Normal")        -- Match sign column color with normal background
+vim.diagnostic.config({ signs = false })     -- Disable diagnostic signs
 
-vim.o.expandtab = true
-vim.o.tabstop = 4
-vim.o.shiftwidth = 4
-vim.o.softtabstop = 4
+-- Indentation and tabs
+vim.o.expandtab = true          -- Use spaces instead of tabs
+vim.o.tabstop = 4               -- Number of spaces per tab
+vim.o.shiftwidth = 4            -- Indent size for << and >>
+vim.o.softtabstop = 4           -- Spaces a tab feels like in insert mode
 
-vim.o.wrap = false
+-- Wrapping and scrolling
+vim.o.wrap = false              -- Disable line wrapping
+vim.o.scrolloff = 8             -- Keep 8 lines above/below cursor when scrolling
 
-vim.o.updatetime = 300
+-- Statusline and command display
+vim.o.laststatus = 2            -- Always show statusline
+vim.o.statusline = ""           -- Empty custom statusline
+vim.o.showmode = false          -- Don't show mode (like -- INSERT --)
 
-vim.o.termguicolors = true
+-- UI and performance tweaks
+vim.o.termguicolors = true      -- Enable 24-bit RGB colors
+vim.o.updatetime = 300          -- Faster update time for CursorHold events
+-- vim.o.winborder = 'rounded'
+vim.g.netrw_banner = 0
 
-vim.o.signcolumn = "yes"
-
-vim.o.laststatus = 0
-
-vim.o.undofile = true
-
-vim.o.scrolloff = 8
-
-vim.o.showmode = false
+-- Persistent undo
+vim.o.undofile = true           -- Enable persistent undo
 

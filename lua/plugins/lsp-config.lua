@@ -6,6 +6,12 @@ return {
         end
 	},
     {
+        'lukas-reineke/lsp-format.nvim'
+        config = function()
+            require("lsp-format").setup()
+        end
+    },
+    {
         "williamboman/mason-lspconfig.nvim",
         config = function()
             local mason_lspconfig = require("mason-lspconfig")
