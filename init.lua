@@ -1,3 +1,4 @@
+
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.clipboard = "unnamedplus"
@@ -38,6 +39,7 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.extra'
 })
 
+-- maybe i'll make a colorscheme myself
 vim.g.zenbones_compat = 1
 vim.cmd('colorscheme zenbones')
 vim.api.nvim_set_hl(0, 'Normal', { bg = nil }) 
@@ -58,7 +60,7 @@ local pick = require('mini.pick')
 pick.setup({
     source = { show = pick.default_show },
     window = {
-        prompt_caret = '| ',
+        prompt_caret = '⎸',
         prompt_prefix = ' > ',
     },
 })
