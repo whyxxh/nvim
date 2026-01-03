@@ -1,4 +1,3 @@
-
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.o.clipboard = "unnamedplus"
@@ -99,16 +98,12 @@ require('nvim-treesitter').setup({
     highlight = { enable = true },
 })
 
--- Oil
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
--- Pick
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
 vim.keymap.set('n', 'z=', ':Pick spellsuggest<CR>')
--- Lsp
 vim.keymap.set('n', 'gre', function() vim.diagnostic.open_float() end)
 vim.keymap.set('n', 'grf', function() vim.lsp.buf.format() end)
 vim.keymap.set('n', 'grd', function() vim.lsp.buf.definition() end)
--- Other
 vim.keymap.set('n', '<leader>bn', ':bn<CR>')
 vim.keymap.set('n', '<ESC>', ':nohl<CR>')
 vim.keymap.set('n', '<leader>q', ':q!<CR>')
@@ -127,15 +122,6 @@ for _, lsp in ipairs(lsps) do
     vim.lsp.config(lsp, {})
     vim.lsp.enable(lsp)
 end
-
--- vim.lsp.enable("clangd")
--- vim.lsp.enable("ruff")
--- vim.lsp.enable("pyright")
--- vim.lsp.enable("marksman")
--- vim.lsp.enable("tinymist")
--- vim.lsp.enable("ocamllsp")
--- vim.lsp.config("hls", {})
--- vim.lsp.enable("hls")
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = '*',
