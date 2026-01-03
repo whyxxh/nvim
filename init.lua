@@ -23,31 +23,42 @@ vim.g.netrw_banner = 0
 vim.o.conceallevel = 2
 vim.o.winborder = "rounded"
 vim.o.undofile = true
+vim.o.cursorline = true
 
-vim.diagnostic.config({ signs = false })
+vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
     'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/stevearc/oil.nvim',
-    'https://github.com/zenbones-theme/zenbones.nvim',
     'https://github.com/chomosuke/typst-preview.nvim',
     'https://github.com/nvim-mini/mini.pick',
+    'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
     'https://github.com/neovimhaskell/haskell-vim',
-    'https://github.com/y9san9/y9nika.nvim',
-    'https://github.com/nvim-mini/mini.extra'
+    -- colorschemes
+    'https://github.com/rktjmp/lush.nvim',
+    'https://github.com/zenbones-theme/zenbones.nvim',
 })
 
--- maybe i'll make a colorscheme myself
-vim.g.zenbones_compat = 1
+-- NOTE: Maybe make a colorscheme myself
+vim.g.zenbones = { 
+    italic_comments = false, italic_strings = false,
+    transparent_background = true,
+}
+local edits = {
+    Constant = { bold = false },
+    LineNr = { fg = '#373737' },
+    CursorLine = { bg = '#1a1a1a' },
+    NormalFloat = { link = 'Normal' },
+    BlinkCmpMenu = { link = 'NormalFloat' },
+    BlinkCmpMenuBorder = { link = 'NormalFloat' },
+    BlinkCmpMenuSelection = { bg = '#252525' },
+}
 vim.cmd('colorscheme zenbones')
-vim.api.nvim_set_hl(0, 'Normal', { bg = nil }) 
-vim.api.nvim_set_hl(0, 'LineNr', { fg = '#373737' }) 
-vim.api.nvim_set_hl(0, 'NormalFloat', { link = 'Normal' }) 
-vim.api.nvim_set_hl(0, 'BlinkCmpMenu', { link = 'NormalFloat' }) 
-vim.api.nvim_set_hl(0, 'BlinkCmpMenuBorder', { link = 'NormalFloat' }) 
-vim.api.nvim_set_hl(0, 'BlinkCmpMenuSelection', { bg = '#252525' }) 
+for group, opts in pairs(edits) do
+    vim.api.nvim_set_hl(0, group, opts) 
+end
 
 require('oil').setup({
     delete_to_trash = true,
@@ -113,10 +124,22 @@ local lsps = {
 }
 
 for _, lsp in ipairs(lsps) do
+    vim.lsp.config(lsp, {})
     vim.lsp.enable(lsp)
 end
 
+-- vim.lsp.enable("clangd")
+-- vim.lsp.enable("ruff")
+-- vim.lsp.enable("pyright")
+-- vim.lsp.enable("marksman")
+-- vim.lsp.enable("tinymist")
+-- vim.lsp.enable("ocamllsp")
+-- vim.lsp.config("hls", {})
+-- vim.lsp.enable("hls")
+
 vim.api.nvim_create_autocmd('FileType', {
-    pattern = { '<filetype>' },
-    callback = function() vim.treesitter.start() end,
+    pattern = '*',
+    callback = function()
+        pcall(vim.treesitter.start)
+    end,
 })
