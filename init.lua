@@ -1,9 +1,9 @@
-vim.g.mapleader = " "
-vim.g.maplocalleader = " "
-vim.o.clipboard = "unnamedplus"
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
+vim.o.clipboard = 'unnamedplus'
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = "yes"
+vim.o.signcolumn = 'yes'
 vim.o.splitbelow = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
@@ -20,7 +20,7 @@ vim.o.termguicolors = true
 vim.o.updatetime = 300
 vim.g.netrw_banner = 0
 vim.o.conceallevel = 2
-vim.o.winborder = "rounded"
+vim.o.winborder = 'rounded'
 vim.o.undofile = true
 vim.o.cursorline = true
 
@@ -38,6 +38,7 @@ vim.pack.add({
     -- colorschemes
     'https://github.com/rktjmp/lush.nvim',
     'https://github.com/zenbones-theme/zenbones.nvim',
+    'https://github.com/bettervim/yugen.nvim'
 })
 
 -- NOTE: Maybe make a colorscheme myself
@@ -63,38 +64,34 @@ require('oil').setup({
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
     view_options = { show_hidden = true, natural_order = true, },
-    keymaps = { ['<BS>'] = { 'actions.parent', mode = 'n' }, },
     columns = { 'icon' },
 })
-local pick = require('mini.pick')
-pick.setup({
-    source = { show = pick.default_show },
-    window = {
-        prompt_caret = '⎸',
-        prompt_prefix = ' > ',
-    },
-})
+
 require('mini.extra').setup({})
-require("blink.cmp").setup({
+require('mini.pick').setup({
+    source = { show = require('mini.pick').default_show },
+    window = { prompt_prefix = ' > ', },
+})
+
+require('blink.cmp').setup({
     signature = { enabled = true },
     keymap = { preset = 'enter' },
-    fuzzy = {
-        implementation = "lua",
-    },
+    fuzzy = { implementation = 'lua', },
     completion = {
         documentation = { auto_show = true, auto_show_delay_ms = 500 },
         menu = {
             scrollbar = false,
             auto_show = true,
             draw = {
-                treesitter = { "lsp" },
-                columns = { { "label", "label_description", gap = 1 } },
+                treesitter = { 'lsp' },
+                columns = { { 'label', 'label_description', gap = 1 } },
             },
         },
     },
 })
+
 require('nvim-treesitter').setup({
-    ensure_installed = { "haskell" },
+    ensure_installed = { 'haskell', 'c', 'python', 'ocaml' },
     highlight = { enable = true },
 })
 
@@ -128,4 +125,13 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function()
         pcall(vim.treesitter.start)
     end,
+})
+
+local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+vim.api.nvim_create_autocmd('TextYankPost', {
+    pattern = '*',
+    callback = function()
+        vim.highlight.on_yank({ timeout = 50 })
+    end,
+    group = highlight_group,
 })

@@ -8,6 +8,10 @@
       "rev": "18712d9d292dd362067de74d3b54eb90ce860ba9",
       "src": "https://github.com/Saghen/blink.cmp"
     },
+    "gruber-darker.nvim": {
+      "rev": "6615b4ac1fe77a3f4f8168ba1d4a9f2fff0d8d55",
+      "src": "https://github.com/blazkowolf/gruber-darker.nvim"
+    },
     "haskell-tools.nvim": {
       "rev": "c6769c0cd0f39d17d7462b9fa7d91001d5ad1cf9",
       "src": "https://github.com/mrcjkb/haskell-tools.nvim"
@@ -51,6 +55,10 @@
     "y9nika.nvim": {
       "rev": "98cb5a1dd79d2aa8655b8000e8933f588d2786b0",
       "src": "https://github.com/y9san9/y9nika.nvim"
+    },
+    "yugen.nvim": {
+      "rev": "cfd97621c2f724443346ae841facaf4e00410e5a",
+      "src": "https://github.com/bettervim/yugen.nvim"
     },
     "zenbones.nvim": {
       "rev": "4635a3f46d1066975d1074cd9f61f93cb1e32f64",
