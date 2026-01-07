@@ -115,6 +115,11 @@ local lsps = {
     'hls',
 }
 
+-- particular
+vim.lsp.config('clangd', {
+    cmd = { "/opt/homebrew/opt/llvm/bin/clangd" },
+})
+-- general
 for _, lsp in ipairs(lsps) do
     vim.lsp.config(lsp, {})
     vim.lsp.enable(lsp)
