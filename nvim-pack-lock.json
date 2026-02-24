@@ -4,9 +4,25 @@
       "rev": "1fc9e29fbbce94f127cc8b21960b7e3c85187960",
       "src": "https://github.com/p00f/alabaster.nvim"
     },
+    "black-metal-theme-neovim": {
+      "rev": "6d0207871387077f40d5396ab1ae90520e688d36",
+      "src": "https://github.com/metalelf0/black-metal-theme-neovim"
+    },
     "blink.cmp": {
       "rev": "18712d9d292dd362067de74d3b54eb90ce860ba9",
       "src": "https://github.com/Saghen/blink.cmp"
+    },
+    "compile-mode.nvim": {
+      "rev": "6b41499bd782be2c213011072ce0f0eb9f7b78a2",
+      "src": "https://github.com/ej-shafran/compile-mode.nvim"
+    },
+    "conjure": {
+      "rev": "403639610bcb9b6a5dfc494dc3179cc19773a471",
+      "src": "https://github.com/Olical/conjure"
+    },
+    "darkmatter-nvim": {
+      "rev": "5663ddc9d8580c0c43b996e01bfe1a335789e9c9",
+      "src": "https://github.com/stevedylandev/darkmatter-nvim"
     },
     "gruber-darker.nvim": {
       "rev": "6615b4ac1fe77a3f4f8168ba1d4a9f2fff0d8d55",
@@ -20,9 +36,29 @@
       "rev": "f35d02204b4813d1dbe8b0e98cc39701a4b8e15e",
       "src": "https://github.com/neovimhaskell/haskell-vim"
     },
+    "idris2-nvim": {
+      "rev": "19dcf61737293365c23c890ca622fa34aeb12780",
+      "src": "https://github.com/idris-community/idris2-nvim"
+    },
+    "jellybeans.nvim": {
+      "rev": "28b80886b54396b13a2a85edf608926333e842b9",
+      "src": "https://github.com/WTFox/jellybeans.nvim"
+    },
+    "koda.nvim": {
+      "rev": "9f55beb8997a85e257687e4917f87581b015416f",
+      "src": "https://github.com/oskarnurm/koda.nvim"
+    },
+    "lean.nvim": {
+      "rev": "904dcc2787effac5e0394a46e78499b2c094a3df",
+      "src": "https://github.com/Julian/lean.nvim"
+    },
     "lush.nvim": {
       "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
       "src": "https://github.com/rktjmp/lush.nvim"
+    },
+    "mason.nvim": {
+      "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
+      "src": "https://github.com/mason-org/mason.nvim"
     },
     "mini.extra": {
       "rev": "673633b97b64292c82d473ea2bd31b767dbe3907",
@@ -44,13 +80,25 @@
       "rev": "963c8d2c5538c4a896a31f396b8a5a2683e254dc",
       "src": "https://github.com/stevearc/oil.nvim"
     },
+    "plenary.nvim": {
+      "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
+      "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
     "rasmus.nvim": {
       "rev": "49f7ee7bf3eb00db52c77f84b15bc69f318bafc1",
       "src": "https://github.com/kvrohit/rasmus.nvim"
     },
+    "sakura.nvim": {
+      "rev": "9ec556973513700f6ad3fe816bd1ae6ceebabb3f",
+      "src": "https://github.com/anAcc22/sakura.nvim"
+    },
     "typst-preview.nvim": {
       "rev": "e123a7ab64e52d836e00dea9251e85b201f38966",
       "src": "https://github.com/chomosuke/typst-preview.nvim"
+    },
+    "vim-jack-in": {
+      "rev": "45e5293cff0802a51dbed31a9b0141b0f80e2952",
+      "src": "https://github.com/clojure-vim/vim-jack-in"
     },
     "y9nika.nvim": {
       "rev": "98cb5a1dd79d2aa8655b8000e8933f588d2786b0",
