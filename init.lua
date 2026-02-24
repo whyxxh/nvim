@@ -37,19 +37,16 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    'https://github.com/ej-shafran/compile-mode.nvim',
     -- colorschemes
     'https://github.com/rktjmp/lush.nvim',
     'https://github.com/zenbones-theme/zenbones.nvim',
 })
 
--- NOTE: Maybe make a colorscheme myself
 vim.g.zenbones = { 
     italic_comments = false, italic_strings = false,
     transparent_background = true,
 }
 local edits = {
-    -- ** Transparent
     -- Normal = { bg = nil },
     -- SignColumn = { bg = nil },
     -- CursorLineNR = { bg = nil },
@@ -70,9 +67,6 @@ vim.cmd('colorscheme zenbones')
 for group, opts in pairs(edits) do
     vim.api.nvim_set_hl(0, group, opts) 
 end
-
--- require("black-metal").setup({transparent = true})
--- vim.cmd('colorscheme burzum')
 
 require("mason").setup()
 
@@ -110,27 +104,6 @@ require('nvim-treesitter').setup({
     highlight = { enable = true },
 })
 
-vim.g.compile_mode = {
-    default_command = {
-      python = "python %",
-      c = "cc -o %:r % && ./%:r",
-      odin = "odin run ."
-    },
-    default_command = "./build.sh",
-    error_regexp_table = {
-        odin = {
-            -- Matches:
-            -- /path/file.odin(7:5) Error: message
-            regex = [[^\(\S\+\.odin\)(\([0-9]\+\):\([0-9]\+\))\s\+\(Error\|Warning\):\s\+\(.*\)$]],
-            filename = 1,
-            row = 2,
-            col = 3,
-            type = {4},   -- uses capture group 4 to determine level
-            priority = 10,
-        },
-    },
-}
-
 vim.keymap.set('n', '<leader>e', ':Oil<CR>')
 vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
 vim.keymap.set('n', 'z=', ':Pick spellsuggest<CR>')
@@ -142,6 +115,8 @@ vim.keymap.set('n', '<ESC>', ':nohl<CR>')
 vim.keymap.set('n', '<leader>q', ':q!<CR>')
 vim.keymap.set('n', '<leader>x', ':wq<CR>')
 vim.keymap.set('n', '<leader>w', ':up<CR>')
+vim.keymap.set('n', '<leader>cn', ':cn<CR>')
+vim.keymap.set('n', '<leader>cp', ':cp<CR>')
 vim.keymap.set('i', '<C-x><C-o>', function()
     require('blink.cmp').show()
     require('blink.cmp').show_documentation()
@@ -157,10 +132,9 @@ local lsps = {
     'clojure_lsp',
     'pyright',
     'ltex_ls',
-    'ols',
+    -- 'ols',
 }
 
--- particular
 vim.lsp.config('clangd', {
     cmd = { "/opt/homebrew/opt/llvm/bin/clangd" },
 })
@@ -172,7 +146,7 @@ vim.lsp.config('ltex', {
     },
   },
 })
--- general
+
 for _, lsp in ipairs(lsps) do
     vim.lsp.config(lsp, {})
     vim.lsp.enable(lsp)
@@ -193,6 +167,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
     end,
     group = highlight_group,
 })
+
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(ev)
     local client = vim.lsp.get_client_by_id(ev.data.client_id)
@@ -201,6 +176,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end
   end,
 })
+
 vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
   callback = function()
     vim.opt.guicursor =
@@ -212,6 +188,7 @@ vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
       "sm:block-blinkwait175-blinkoff150-blinkon175"
   end,
 })
+
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   callback = function()
     vim.opt.guicursor = "a:ver25-blinkon0"
