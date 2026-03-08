@@ -19,12 +19,12 @@ vim.o.showmode = false
 vim.o.termguicolors = true
 vim.o.updatetime = 300
 vim.g.netrw_banner = 0
-vim.o.conceallevel = 0
+vim.o.conceallevel = 2
 vim.o.winborder = 'rounded'
 vim.o.undofile = true
 vim.o.cursorline = false
 
-vim.diagnostic.enable(false)
+-- vim.diagnostic.enable(false)
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
@@ -40,35 +40,38 @@ vim.pack.add({
     -- colorschemes
     'https://github.com/rktjmp/lush.nvim',
     'https://github.com/zenbones-theme/zenbones.nvim',
+    'https://github.com/blazkowolf/gruber-darker.nvim',
 })
 
+local c = 'zenbones'
 vim.g.zenbones = { 
     italic_comments = false, italic_strings = false,
     transparent_background = true,
 }
 local edits = {
-    -- Normal = { bg = nil },
-    -- SignColumn = { bg = nil },
-    -- CursorLineNR = { bg = nil },
     Constant = { bold = false },
     StatusLine = { bg = nil },
     StatusLineNC = { bg = nil },
-    LineNr = { fg = '#444444' },
+    LineNrAbove = { fg = '#444444' },
+    LineNrBelow = { fg = '#444444' },
+    LineNr = { fg = '#b4bdc3', bold = true },
     NonText = { fg = '#1a1a1a' },
     CursorLine = { bg = '#1a1a1a' },
     NormalFloat = { link = 'Normal' },
     BlinkCmpMenu = { link = 'NormalFloat' },
     BlinkCmpMenuBorder = { link = 'NormalFloat' },
     BlinkCmpMenuSelection = { bg = '#252525' },
-    Title = { fg = '#a1938c'},
-    DiagnosticUnderlineHint = { link = 'Normal' }
+    -- DiagnosticUnderlineHint = { link = 'Normal' }
 }
-vim.cmd('colorscheme zenbones')
-for group, opts in pairs(edits) do
-    vim.api.nvim_set_hl(0, group, opts) 
+vim.cmd('colorscheme ' .. c)
+if c == 'zenbones' then
+	for group, opts in pairs(edits) do
+	    vim.api.nvim_set_hl(0, group, opts) 
+	end
 end
 
-require("mason").setup()
+
+require('mason').setup()
 
 require('oil').setup({
     delete_to_trash = true,
@@ -90,10 +93,19 @@ require('blink.cmp').setup({
     completion = {
         menu = {
             scrollbar = false,
-            auto_show = false,
+            auto_show = true,
             draw = {
                 treesitter = { 'lsp' },
                 columns = { { 'label', 'label_description', gap = 1 } },
+            },
+        },
+    },
+    sources = {
+        providers = {
+            buffer = {
+                opts = {
+                    get_bufnrs = vim.api.nvim_list_bufs,  -- include all loaded buffers
+                },
             },
         },
     },
@@ -132,7 +144,9 @@ local lsps = {
     'clojure_lsp',
     'pyright',
     'ltex_ls',
-    -- 'ols',
+    'ols',
+    'ruff',
+    'zls',
 }
 
 vim.lsp.config('clangd', {
@@ -195,7 +209,12 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
   end,
 })
 
-vim.api.nvim_create_user_command("Comp", function()
-  vim.cmd("silent make")
-  vim.cmd("copen")
-end, {})
+vim.api.nvim_create_user_command("Comp", function(opts)
+    if opts.args ~= "" then
+        vim.opt.makeprg = opts.args
+    end
+    vim.cmd("silent make")
+    vim.cmd("copen")
+end, {
+nargs = "*",   -- accept arguments
+})

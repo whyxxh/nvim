@@ -24,6 +24,10 @@
       "rev": "5663ddc9d8580c0c43b996e01bfe1a335789e9c9",
       "src": "https://github.com/stevedylandev/darkmatter-nvim"
     },
+    "gruber-darker-vim": {
+      "rev": "5f2cd5a9375873ce66d1b87ef00bac2bdff29356",
+      "src": "https://github.com/drsooch/gruber-darker-vim"
+    },
     "gruber-darker.nvim": {
       "rev": "6615b4ac1fe77a3f4f8168ba1d4a9f2fff0d8d55",
       "src": "https://github.com/blazkowolf/gruber-darker.nvim"
@@ -60,6 +64,10 @@
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim"
     },
+    "mfd.nvim": {
+      "rev": "ee856b89788ab65b69571f81e890062383c098a3",
+      "src": "https://github.com/kungfusheep/mfd.nvim"
+    },
     "mini.extra": {
       "rev": "673633b97b64292c82d473ea2bd31b767dbe3907",
       "src": "https://github.com/nvim-mini/mini.extra"
@@ -91,6 +99,10 @@
     "sakura.nvim": {
       "rev": "9ec556973513700f6ad3fe816bd1ae6ceebabb3f",
       "src": "https://github.com/anAcc22/sakura.nvim"
+    },
+    "silentium.nvim": {
+      "rev": "86c1700f8899b74643852ab51db7ed2795c0242b",
+      "src": "https://github.com/silentium-theme/silentium.nvim"
     },
     "typst-preview.nvim": {
       "rev": "e123a7ab64e52d836e00dea9251e85b201f38966",
