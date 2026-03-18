@@ -3,26 +3,20 @@ vim.g.maplocalleader = ' '
 vim.o.clipboard = 'unnamedplus'
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.signcolumn = 'yes'
-vim.o.splitbelow = true
 vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
 vim.o.wrap = false
+vim.o.swapfile = false
 vim.o.scrolloff = 8
 vim.o.textwidth = 120
 vim.o.laststatus = 2
-local statusline = { ' %t', '%r', '%m', '%=', '[%{&filetype}] ', 'l:%l c:%c ', }
-vim.o.statusline = table.concat(statusline, '')
 vim.o.showmode = false
 vim.o.termguicolors = true
 vim.o.updatetime = 300
-vim.g.netrw_banner = 0
-vim.o.conceallevel = 2
 vim.o.winborder = 'rounded'
 vim.o.undofile = true
-vim.o.cursorline = false
 
 -- vim.diagnostic.enable(false)
 vim.diagnostic.config({ virtual_text = { current_line = true } })
@@ -37,39 +31,9 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    -- colorschemes
-    'https://github.com/rktjmp/lush.nvim',
-    'https://github.com/zenbones-theme/zenbones.nvim',
-    'https://github.com/blazkowolf/gruber-darker.nvim',
 })
 
-local c = 'zenbones'
-vim.g.zenbones = { 
-    italic_comments = false, italic_strings = false,
-    transparent_background = true,
-}
-local edits = {
-    Constant = { bold = false },
-    StatusLine = { bg = nil },
-    StatusLineNC = { bg = nil },
-    LineNrAbove = { fg = '#444444' },
-    LineNrBelow = { fg = '#444444' },
-    LineNr = { fg = '#b4bdc3', bold = true },
-    NonText = { fg = '#1a1a1a' },
-    CursorLine = { bg = '#1a1a1a' },
-    NormalFloat = { link = 'Normal' },
-    BlinkCmpMenu = { link = 'NormalFloat' },
-    BlinkCmpMenuBorder = { link = 'NormalFloat' },
-    BlinkCmpMenuSelection = { bg = '#252525' },
-    -- DiagnosticUnderlineHint = { link = 'Normal' }
-}
-vim.cmd('colorscheme ' .. c)
-if c == 'zenbones' then
-	for group, opts in pairs(edits) do
-	    vim.api.nvim_set_hl(0, group, opts) 
-	end
-end
-
+vim.cmd('colorscheme myzenbones')
 
 require('mason').setup()
 
@@ -77,7 +41,9 @@ require('oil').setup({
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
     view_options = { show_hidden = true, natural_order = true, },
-    columns = { 'icon' },
+    columns = { 
+        'icon',
+    },
 })
 
 require('mini.extra').setup({})
@@ -116,20 +82,23 @@ require('nvim-treesitter').setup({
     highlight = { enable = true },
 })
 
-vim.keymap.set('n', '<leader>e', ':Oil<CR>')
-vim.keymap.set('n', '<leader>ff', ':Pick files<CR>')
-vim.keymap.set('n', 'z=', ':Pick spellsuggest<CR>')
-vim.keymap.set('n', 'gre', function() vim.diagnostic.open_float() end)
-vim.keymap.set('n', 'grf', function() vim.lsp.buf.format() end)
-vim.keymap.set('n', 'grd', function() vim.lsp.buf.definition() end)
-vim.keymap.set('n', '<leader>bn', ':bn<CR>')
-vim.keymap.set('n', '<ESC>', ':nohl<CR>')
-vim.keymap.set('n', '<leader>q', ':q!<CR>')
-vim.keymap.set('n', '<leader>x', ':wq<CR>')
-vim.keymap.set('n', '<leader>w', ':up<CR>')
-vim.keymap.set('n', '<leader>cn', ':cn<CR>')
-vim.keymap.set('n', '<leader>cp', ':cp<CR>')
-vim.keymap.set('i', '<C-x><C-o>', function()
+local map = vim.keymap.set
+map('n', '<leader>e', ':Oil<CR>')
+map('n', '<leader>ff', ':Pick files<CR>')
+map('n', 'z=', ':Pick spellsuggest<CR>')
+map('n', 'gre', vim.diagnostic.open_float)
+map('n', 'dn', function() vim.diagnostic.jump({count=1, float=true}) end)
+map('n', 'dp', function() vim.diagnostic.jump({count=-1, float=true}) end )
+map('n', 'grf',  vim.lsp.buf.format)
+map('n', 'grd', '<C-]>', { noremap = true, silent = true })
+map('n', '<leader>bn', ':bn<CR>')
+map('n', '<ESC>', ':nohl<CR>')
+map('n', '<leader>q', ':q!<CR>')
+map('n', '<leader>x', ':wq<CR>')
+map('n', '<leader>w', ':up<CR>')
+map('n', '<leader>cn', ':cn<CR>')
+map('n', '<leader>cp', ':cp<CR>')
+map('i', '<C-x><C-o>', function()
     require('blink.cmp').show()
     require('blink.cmp').show_documentation()
     require('blink.cmp').hide_documentation()
@@ -144,7 +113,7 @@ local lsps = {
     'clojure_lsp',
     'pyright',
     'ltex_ls',
-    'ols',
+    -- 'ols',
     'ruff',
     'zls',
 }
@@ -191,29 +160,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "VimEnter", "VimResume" }, {
-  callback = function()
-    vim.opt.guicursor =
-      "n-v-c:block," ..
-      "i-ci-ve:ver25," ..
-      "r-cr:hor20," ..
-      "o:hor50," ..
-      "a:blinkwait700-blinkoff400-blinkon250-Cursor/lCursor," ..
-      "sm:block-blinkwait175-blinkoff150-blinkon175"
-  end,
-})
-
-vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-  callback = function()
-    vim.opt.guicursor = "a:ver25-blinkon0"
-  end,
-})
-
 vim.api.nvim_create_user_command("Comp", function(opts)
     if opts.args ~= "" then
         vim.opt.makeprg = opts.args
     end
-    vim.cmd("silent make")
+    vim.cmd("silent make!")
     vim.cmd("copen")
 end, {
 nargs = "*",   -- accept arguments

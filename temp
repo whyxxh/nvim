@@ -1,24 +1,27 @@
+
 vim.g.zenbones = { 
     italic_comments = false, italic_strings = false,
     transparent_background = true,
 }
 local edits = {
+    Normal = { bg = nil },
+    SignColumn = { bg = nil },
     Constant = { bold = false },
     StatusLine = { bg = nil },
     StatusLineNC = { bg = nil },
     LineNrAbove = { fg = '#444444' },
     LineNrBelow = { fg = '#444444' },
     LineNr = { fg = '#b4bdc3', bold = true },
-    NonText = { fg = '#1a1a1a' },
+    NonText = { fg = '#222222' },
     CursorLine = { bg = '#1a1a1a' },
     NormalFloat = { link = 'Normal' },
     BlinkCmpMenu = { link = 'NormalFloat' },
     BlinkCmpMenuBorder = { link = 'NormalFloat' },
     BlinkCmpMenuSelection = { bg = '#252525' },
     -- DiagnosticUnderlineHint = { link = 'Normal' }
-}
+} 
+
 vim.cmd('colorscheme zenbones')
 for group, opts in pairs(edits) do
     vim.api.nvim_set_hl(0, group, opts) 
 end
-
