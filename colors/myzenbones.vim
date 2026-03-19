@@ -451,6 +451,7 @@ else
     highlight helpHyperTextJump guifg=#44525B guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight lCursor guifg=#F0EDEC guibg=#4D5C65 guisp=NONE gui=NONE cterm=NONE
     highlight! link TermCursorNC lCursor
+    highlight! link @type.builtin.c Type
     highlight markdownLinkText guifg=#44525B guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     " light end

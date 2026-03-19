@@ -7,6 +7,7 @@ vim.o.tabstop = 4
 vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 vim.o.expandtab = true
+vim.o.signcolumn = 'yes'
 vim.o.wrap = false
 vim.o.swapfile = false
 vim.o.scrolloff = 8
@@ -18,7 +19,6 @@ vim.o.updatetime = 300
 vim.o.winborder = 'rounded'
 vim.o.undofile = true
 
--- vim.diagnostic.enable(false)
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
@@ -32,8 +32,6 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
 })
-
-vim.cmd('colorscheme myzenbones')
 
 require('mason').setup()
 
@@ -90,7 +88,7 @@ map('n', 'gre', vim.diagnostic.open_float)
 map('n', 'dn', function() vim.diagnostic.jump({count=1, float=true}) end)
 map('n', 'dp', function() vim.diagnostic.jump({count=-1, float=true}) end )
 map('n', 'grf',  vim.lsp.buf.format)
-map('n', 'grd', '<C-]>', { noremap = true, silent = true })
+map('n', 'grd', vim.lsp.buf.definition, { noremap = true, silent = true })
 map('n', '<leader>bn', ':bn<CR>')
 map('n', '<ESC>', ':nohl<CR>')
 map('n', '<leader>q', ':q!<CR>')
@@ -98,6 +96,14 @@ map('n', '<leader>x', ':wq<CR>')
 map('n', '<leader>w', ':up<CR>')
 map('n', '<leader>cn', ':cn<CR>')
 map('n', '<leader>cp', ':cp<CR>')
+map('n', '<C-h>', '<C-w><C-h>')
+map('n', '<C-j>', '<C-w><C-j>')
+map('n', '<C-k>', '<C-w><C-k>')
+map('n', '<C-l>', '<C-w><C-l>')
+map("n", "n", "nzzzv")
+map("n", "N", "Nzzzv")
+map("t", "<ESC>", "<C-\\><C-n>")
+map('n', '<leader>t', '<C-]>')
 map('i', '<C-x><C-o>', function()
     require('blink.cmp').show()
     require('blink.cmp').show_documentation()
@@ -106,28 +112,18 @@ end, { silent = false });
 
 local lsps = {
     'clangd',
-    'marksman',
     'tinymist',
     'ocamllsp',
     'hls',
     'clojure_lsp',
     'pyright',
     'ltex_ls',
-    -- 'ols',
+    'ols',
     'ruff',
-    'zls',
 }
 
 vim.lsp.config('clangd', {
     cmd = { "/opt/homebrew/opt/llvm/bin/clangd" },
-})
-
-vim.lsp.config('ltex', {
-  settings = {
-    ltex = {
-      language = "fr",
-    },
-  },
 })
 
 for _, lsp in ipairs(lsps) do
@@ -140,15 +136,6 @@ vim.api.nvim_create_autocmd('FileType', {
     callback = function(args)
         pcall(vim.treesitter.start, args.buf)
     end,
-})
-
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
-    pattern = '*',
-    callback = function()
-        vim.highlight.on_yank({ timeout = 50 })
-    end,
-    group = highlight_group,
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -167,5 +154,8 @@ vim.api.nvim_create_user_command("Comp", function(opts)
     vim.cmd("silent make!")
     vim.cmd("copen")
 end, {
-nargs = "*",   -- accept arguments
+nargs = "*",
 })
+
+vim.cmd('colorscheme myzenbones')
+vim.cmd(':highlight! link @type.builtin.c Type')
