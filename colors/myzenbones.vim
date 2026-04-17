@@ -102,7 +102,7 @@ if &background ==# 'dark'
     highlight DiffDelete guifg=NONE guibg=#3E2225 guisp=NONE gui=NONE cterm=NONE
     highlight! link diffRemoved DiffDelete
     highlight DiffText guifg=#B4BDC3 guibg=#324757 guisp=NONE gui=NONE cterm=NONE
-    highlight Directory guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=bold
+    highlight Directory guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight Error guifg=#DE6E7C guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link DiagnosticError Error
     highlight! link ErrorMsg Error
@@ -140,7 +140,7 @@ if &background ==# 'dark'
     highlight IncSearch guifg=NONE guibg=#BF8FB5 guisp=NONE gui=bold cterm=bold
     highlight! link CurSearch IncSearch
     highlight Italic guifg=NONE guibg=NONE guisp=NONE gui=italic cterm=italic
-    highlight LineNr guifg=#b4bcd3 guibg=NONE guisp=NONE gui=bold cterm=NONE 
+    highlight LineNr guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=NONE 
     highlight LineNrAbove guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
     highlight LineNrBelow guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
     highlight! link CocCodeLens LineNr
@@ -151,7 +151,7 @@ if &background ==# 'dark'
     highlight! link Question MoreMsg
     highlight! link NnnNormalNC NnnNormal
     highlight! link NnnVertSplit NnnWinSeparator
-    highlight NonText guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight NonText guifg=#151515 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link EndOfBuffer NonText
     highlight! link Whitespace NonText
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -166,7 +166,7 @@ if &background ==# 'dark'
     highlight Search guifg=#B4BDC3 guibg=#65435E guisp=NONE gui=NONE cterm=NONE
     highlight! link CocSearch Search
     highlight! link MatchParen Search
-    highlight! link QuickFixLine Search
+    highlight! link QuickFixLine CursorLine
     highlight! link Sneak Search
     highlight SnacksIndent guifg=#2B2725 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight SnacksIndentScope guifg=#494341 guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -189,7 +189,7 @@ if &background ==# 'dark'
     highlight StatusLine guifg=#B4BDC3 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link TabLine StatusLine
     highlight! link WinBar StatusLine
-    highlight StatusLineNC guifg=#CAD0D4 guibg=#272321 guisp=NONE gui=NONE cterm=NONE
+    highlight! link StatusLineNC StatusLine
     highlight! link TabLineFill StatusLineNC
     highlight! link WinBarNC StatusLineNC
     highlight String guifg=#868C91 guibg=NONE guisp=NONE gui=italic cterm=italic
@@ -201,6 +201,7 @@ if &background ==# 'dark'
     highlight Type guifg=#A1938C guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link helpSpecial Type
     highlight! link markdownCode Type
+    "highlight Operator guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=NONE
     highlight Underlined guifg=NONE guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight Visual guifg=NONE guibg=#3D4042 guisp=NONE gui=NONE cterm=NONE
     highlight WarningMsg guifg=#B77E64 guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -221,6 +222,164 @@ if &background ==# 'dark'
     highlight lCursor guifg=NONE guibg=#797F84 guisp=NONE gui=NONE cterm=NONE
     highlight! link TermCursorNC lCursor
     highlight markdownLinkText guifg=#979FA4 guibg=NONE guisp=NONE gui=underline cterm=underline
+    " Tree-sitter
+    highlight! link @variable                      Identifier
+    highlight! link @variable.builtin              Constant
+    highlight! link @variable.parameter            @variable
+    highlight! link @variable.member               @variable
+
+    highlight! link @constant                      Identifier
+    highlight! link @constant.builtin              Constant
+    highlight! link @constant.macro                Constant
+    highlight! link @module                        Constant
+    highlight! link @module.builtin                @module
+    highlight! link @label                         Statement
+
+    highlight! link @string                        String
+    highlight! link @string.documentation          @string
+    highlight! link @string.regexp                 Constant
+    highlight! link @string.escape                 Special
+    highlight! link @string.special                Special
+    highlight! link @string.special.symbol         Identifier
+    highlight! link @string.special.url            @string.special
+    highlight! link @string.special.path           @string.special
+
+    highlight! link @character                     Constant
+    highlight! link @character.special             Special
+
+    highlight! link @boolean                       Boolean
+    highlight! link @number                        Number
+    highlight! link @number.float                  @number
+
+    highlight! link @type                          Type
+    highlight! link @type.builtin                  @type
+    highlight! link @type.definition               @type
+    highlight! link @type.qualifier                @type
+
+    highlight! link @attribute                     PreProc
+    highlight! link @property                      Identifier
+
+    highlight! link @function                      Function
+    highlight! link @function.builtin              Special
+    highlight! link @function.call                 @function
+    highlight! link @function.macro                PreProc
+
+    highlight! link @function.method               @function
+    highlight! link @function.method.call          @function
+
+    highlight! link @constructor                   Special
+    highlight! link @operator                      Statement
+
+    highlight! link @keyword.coroutine             Statement
+    highlight! link @keyword.function              Statement
+    highlight! link @keyword.operator              Statement
+    highlight! link @keyword.import                PreProc
+    highlight! link @keyword.storage               Type
+    highlight! link @keyword.repeat                Statement
+    highlight! link @keyword.return                Statement
+    highlight! link @keyword.debug                 Special
+    highlight! link @keyword.exception             Statement
+
+    highlight! link @keyword.conditional           Statement
+    highlight! link @keyword.conditional.ternary   @keyword.conditional
+    highlight! link @keyword.directive             PreProc
+    highlight! link @keyword.directive.define      @keyword.directive
+
+    highlight! link @punctuation.delimiter         Delimiter
+    highlight! link @punctuation.bracket           Delimiter
+    highlight! link @punctuation.special           Delimiter
+
+    highlight! link @comment                       Comment
+    highlight! link @comment.documentation         @comment
+
+    highlight! link @comment.error                 Error
+    highlight! link @comment.warning               WarningMsg
+    highlight! link @comment.todo                  Todo
+    highlight! link @comment.note                  DiagnosticInfo
+
+    highlight! link @markup.strong                 Bold
+    highlight! link @markup.italic                 Italic
+    highlight! link @markup.strikethrough          strikethrough
+    highlight! link @markup.underline              Underlined
+
+    highlight! link @markup.heading                Type
+
+    highlight! link @markup.math                   Special
+    highlight! link @markup.environment            PreProc
+
+    highlight! link @markup.link                   Constant
+    highlight! link @markup.link.label             Special
+    highlight! link @markup.link.url               Constant
+
+    highlight! link @markup.raw                    Constant
+    highlight! link @markup.raw.block              @markup.raw
+
+    highlight! link @markup.list                   Special
+    highlight! link @markup.list.checked           @markup.list
+    highlight! link @markup.list.unchecked         @markup.list
+
+    highlight! link @diff.plus                     DiffAdd
+    highlight! link @diff.minus                    DiffDelete
+    highlight! link @diff.delta                    DiffChange
+
+    highlight! link @tag                           Special
+    highlight! link @tag.attribute                 @property
+    highlight! link @tag.delimiter                 Delimiter
+
+    highlight! link @punctuation.special.markdown  LineNrAbove
+    highlight! link @string.escape.markdown        SpecialKey
+    highlight! link @markup.link.markdown          Identifier
+    highlight! link @markup.italic.markdown        Italic
+    highlight! link @markup.title.markdown         Statement
+    highlight! link @markup.raw.markdown           Type
+    highlight! link @markup.link.url.markdown      SpecialComment
+
+    highlight! link @markup.link.vimdoc            Identifier
+    highlight! link @variable.parameter.vimdoc     Type
+    highlight! link @label.vimdoc                  Type
+    highlight! link @constructor.lua                   Delimiter
+
+    highlight! link @lsp.type.boolean                         @boolean
+    highlight! link @lsp.type.builtinType                     @type.builtin
+    highlight! link @lsp.type.comment                         @comment
+    highlight! link @lsp.type.decorator                       @attribute
+    highlight! link @lsp.type.deriveHelper                    @attribute
+    highlight! link @lsp.type.enum                            @type
+    highlight! link @lsp.type.enumMember                      @constant
+    highlight! link @lsp.type.escapeSequence                  @string.escape
+    highlight! link @lsp.type.formatSpecifier                 @markup.list
+    highlight! link @lsp.type.generic                         @variable
+    highlight! link @lsp.type.interface                       @type
+    highlight! link @lsp.type.keyword                        Statement
+    highlight! link @lsp.type.lifetime                        @keyword.storage
+    highlight! link @lsp.type.namespace                       @module
+    highlight! link @lsp.type.number                          @number
+    highlight! link @lsp.type.operator                        @operator
+    highlight! link @lsp.type.parameter                       @variable.parameter
+    highlight! link @lsp.type.property                        @property
+    highlight! link @lsp.type.selfKeyword                     @variable.builtin
+    highlight! link @lsp.type.selfTypeKeyword                 @variable.builtin
+    highlight! link @lsp.type.string                          @string
+    highlight! link @lsp.type.typeAlias                       @type.definition
+    highlight! link @lsp.type.variable                        Normal
+    highlight! link @lsp.typemod.class.defaultLibrary         @type.builtin
+    highlight! link @lsp.typemod.enum.defaultLibrary          @type.builtin
+    highlight! link @lsp.typemod.enumMember.defaultLibrary    @constant.builtin
+    highlight! link @lsp.typemod.function.defaultLibrary      @function.builtin
+    highlight! link @lsp.typemod.keyword.async                @keyword.coroutine
+    highlight! link @lsp.typemod.keyword.injected            Statement
+    highlight! link @lsp.typemod.macro.defaultLibrary         @function.builtin
+    highlight! link @lsp.typemod.method.defaultLibrary        @function.builtin
+    highlight! link @lsp.typemod.operator.injected            @operator
+    highlight! link @lsp.typemod.string.injected              @string
+    highlight! link @lsp.typemod.struct.defaultLibrary        @type.builtin
+    highlight! link @lsp.typemod.type.defaultLibrary          @type
+    highlight! link @lsp.typemod.typeAlias.defaultLibrary     @type
+    highlight! link @lsp.typemod.variable.callable            @function
+    highlight! link @lsp.typemod.variable.defaultLibrary      @variable.builtin
+    highlight! link @lsp.typemod.variable.injected            @variable
+    highlight! link @lsp.typemod.variable.static              @constant
+
     " dark end
 
     if !s:italics
@@ -382,7 +541,7 @@ else
     highlight! link Question MoreMsg
     highlight! link NnnNormalNC NnnNormal
     highlight! link NnnVertSplit NnnWinSeparator
-    highlight NonText guifg=#BBABA3 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight NonText guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link EndOfBuffer NonText
     highlight! link Whitespace NonText
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -456,6 +615,7 @@ else
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     " light end
 
+
     if !s:italics
         " no italics light start
         " This codeblock is auto-generated by shipwright.nvim
@@ -496,3 +656,4 @@ if has('terminal')
                 \ g:terminal_color_15
                 \ ]
 endif
+
