@@ -22,7 +22,6 @@ vim.o.undofile = true
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
-    'https://github.com/whyxxh/black-metal-theme-neovim',
     'https://github.com/nvim-lua/plenary.nvim',
     'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/mason-org/mason.nvim',
@@ -36,11 +35,7 @@ vim.pack.add({
     'https://github.com/kungfusheep/mfd.nvim',
 })
 
--- vim.cmd.colorscheme("myzenbones")
-require("black-metal").setup({
-    theme = "devourment",
-})
-require("black-metal").load()
+vim.cmd.colorscheme("myzenbones")
 
 require('mason').setup()
 

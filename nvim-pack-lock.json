@@ -5,8 +5,8 @@
       "src": "https://github.com/p00f/alabaster.nvim"
     },
     "black-metal-theme-neovim": {
-      "rev": "6d0207871387077f40d5396ab1ae90520e688d36",
-      "src": "https://github.com/metalelf0/black-metal-theme-neovim"
+      "rev": "506df373b7ea0c1fe1765fd393e5bbcd1b14a386",
+      "src": "https://github.com/whyxxh/black-metal-theme-neovim"
     },
     "blink.cmp": {
       "rev": "18712d9d292dd362067de74d3b54eb90ce860ba9",
