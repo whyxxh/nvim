@@ -201,6 +201,12 @@ if &background ==# 'dark'
     highlight Type guifg=#A1938C guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link helpSpecial Type
     highlight! link markdownCode Type
+    highlight! link markdownCodeBlock Special
+    highlight! link markdownListMarker LineNrAbove
+    highlight! link markdownOrderedListMarker LineNrAbove
+    highlight! link markdownItalicDelimiter LineNrAbove
+    highlight! link markdownBoldDelimiter LineNrAbove
+    highlight! link markdownBoldItalicDelimiter LineNrAbove
     "highlight Operator guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=NONE
     highlight Underlined guifg=NONE guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight Visual guifg=NONE guibg=#3D4042 guisp=NONE gui=NONE cterm=NONE
@@ -326,7 +332,7 @@ if &background ==# 'dark'
     highlight! link @tag.attribute                 @property
     highlight! link @tag.delimiter                 Delimiter
 
-    highlight! link @punctuation.special.markdown  LineNrAbove
+    highlight! link @punctuation.special.markdown  LineNrAb
     highlight! link @string.escape.markdown        SpecialKey
     highlight! link @markup.link.markdown          Identifier
     highlight! link @markup.italic.markdown        Italic

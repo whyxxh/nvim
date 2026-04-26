@@ -1,5 +1,9 @@
 {
   "plugins": {
+    "LuaSnip": {
+      "rev": "a62e1083a3cfe8b6b206e7d3d33a51091df25357",
+      "src": "https://github.com/L3MON4D3/LuaSnip"
+    },
     "alabaster.nvim": {
       "rev": "1fc9e29fbbce94f127cc8b21960b7e3c85187960",
       "src": "https://github.com/p00f/alabaster.nvim"
@@ -79,6 +83,10 @@
     "mini.pick": {
       "rev": "8cb40ee55dd156957b1116eded6135e6aeaa078b",
       "src": "https://github.com/nvim-mini/mini.pick"
+    },
+    "mini.snippets": {
+      "rev": "8e3acd41bd7ee8f89967c83bacc93871b98a14aa",
+      "src": "https://github.com/nvim-mini/mini.snippets"
     },
     "nord.nvim": {
       "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",

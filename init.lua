@@ -23,7 +23,6 @@ vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
     'https://github.com/nvim-lua/plenary.nvim',
-    'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
     'https://github.com/stevearc/oil.nvim',
@@ -31,8 +30,7 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    'https://github.com/shaunsingh/nord.nvim',
-    'https://github.com/kungfusheep/mfd.nvim',
+    'https://github.com/L3MON4D3/LuaSnip',
 })
 
 vim.cmd.colorscheme("myzenbones")
@@ -79,11 +77,6 @@ require('blink.cmp').setup({
     },
 })
 
-require('nvim-treesitter').setup({
-    ensure_installed = { 'haskell', 'c', 'python', 'ocaml' },
-    highlight = { enable = true },
-})
-
 local map = vim.keymap.set
 map('n', '<leader>e', ':Oil<CR>')
 map('n', '<leader>ff', ':Pick files<CR>')
@@ -128,7 +121,9 @@ end
 vim.api.nvim_create_autocmd('FileType', {
     pattern = '*',
     callback = function(args)
-        pcall(vim.treesitter.start, args.buf)
+        if vim.bo[args.buf].filetype ~= 'markdown' then
+            pcall(vim.treesitter.start, args.buf)
+        end
     end,
 })
 
@@ -150,59 +145,3 @@ vim.api.nvim_create_user_command('Comp', function(opts)
 end, {
 nargs = '*',
 })
-
-
-function _G.SpellToQuickfix()
-  local save = vim.fn.getpos(".")
-  local qf = {}
-
-  vim.cmd("normal! gg")
-
-  while true do
-    -- jump to next misspelled word
-    local ok = pcall(vim.cmd, "normal! ]s")
-    if not ok then break end
-
-    local word = vim.fn.spellbadword()[1]
-    if word == nil or word == "" then
-      break
-    end
-
-    table.insert(qf, {
-      filename = vim.api.nvim_buf_get_name(0),
-      lnum = vim.fn.line("."),
-      col = vim.fn.col("."),
-      text = word,
-    })
-  end
-
-  vim.fn.setqflist({}, "r", { items = qf })
-  vim.fn.setpos(".", save)
-end
-
-vim.api.nvim_create_user_command("SpellQF", function()
-  local items = {}
-
-  local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-
-  for lnum, line in ipairs(lines) do
-    local checks = vim.spell.check(line)
-
-    for _, c in ipairs(checks) do
-      local word = c[1]
-      local col = c[3]
-
-      table.insert(items, {
-        filename = vim.api.nvim_buf_get_name(0),
-        lnum = lnum,
-        col = col,
-        text = word,
-      })
-    end
-  end
-
-  vim.fn.setqflist(items, "r")
-  vim.cmd("copen")
-end, {})
-
-require('vim._core.ui2').enable({})
