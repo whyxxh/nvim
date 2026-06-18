@@ -25,7 +25,7 @@ if &background ==# 'dark'
     let g:terminal_color_13 = '#CF86C1'
     let g:terminal_color_14 = '#65B8C1'
     let g:terminal_color_15 = '#888F94'
-    highlight Normal guifg=#B4BDC3 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Normal guifg=#B4BDC3 guibg=#151515 guisp=NONE gui=NONE cterm=NONE
     highlight! link ModeMsg Normal
     highlight Bold guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight Boolean guifg=#B4BDC3 guibg=NONE guisp=NONE gui=italic cterm=italic
@@ -75,14 +75,14 @@ if &background ==# 'dark'
     highlight DiagnosticSignOk guifg=#819B69 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight DiagnosticSignWarn guifg=#B77E64 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link CocWarningSign DiagnosticSignWarn
-    highlight DiagnosticUnderlineError guifg=NONE guibg=NONE guisp=#DE6E7C gui=undercurl cterm=undercurl
+    highlight DiagnosticUnderlineError guifg=NONE guibg=None guisp=#DE6E7C gui=underline cterm=underline
     highlight! link CocErrorHighlight DiagnosticUnderlineError
-    highlight DiagnosticUnderlineHint guifg=NONE guibg=NONE guisp=#B279A7 gui=undercurl cterm=undercurl
+    highlight DiagnosticUnderlineHint guifg=NONE guibg=NONE guisp=#B279A7 gui=underline cterm=underline
     highlight! link CocHintHighlight DiagnosticUnderlineHint
-    highlight DiagnosticUnderlineInfo guifg=NONE guibg=NONE guisp=#6099C0 gui=undercurl cterm=undercurl
+    highlight DiagnosticUnderlineInfo guifg=NONE guibg=NONE guisp=#6099C0 gui=underline cterm=underline
     highlight! link CocInfoHighlight DiagnosticUnderlineInfo
-    highlight DiagnosticUnderlineOk guifg=NONE guibg=NONE guisp=#819B69 gui=undercurl cterm=undercurl
-    highlight DiagnosticUnderlineWarn guifg=NONE guibg=NONE guisp=#B77E64 gui=undercurl cterm=undercurl
+    highlight DiagnosticUnderlineOk guifg=NONE guibg=NONE guisp=#819B69 gui=underline cterm=underline
+    highlight DiagnosticUnderlineWarn guifg=NONE guibg=NONE guisp=#B77E64 gui=underline cterm=underline
     highlight! link CocWarningHighlight DiagnosticUnderlineWarn
     highlight DiagnosticVirtualTextError guifg=#DE6E7C guibg=#272020 guisp=NONE gui=NONE cterm=NONE
     highlight! link CocErrorVirtualText DiagnosticVirtualTextError
@@ -92,7 +92,7 @@ if &background ==# 'dark'
     highlight DiagnosticVirtualTextWarn guifg=#B77E64 guibg=#242120 guisp=NONE gui=NONE cterm=NONE
     highlight! link CocWarningVirtualText DiagnosticVirtualTextWarn
     highlight! link DiagnosticDeprecated DiagnosticWarn
-    highlight! link DiagnosticUnnecessary DiagnosticWarn
+    highlight! link DiagnosticUnnecessary Normal
     highlight! link NotifyWARNIcon DiagnosticWarn
     highlight! link NotifyWARNTitle DiagnosticWarn
     highlight DiffAdd guifg=NONE guibg=#232D1A guisp=NONE gui=NONE cterm=NONE
@@ -141,8 +141,8 @@ if &background ==# 'dark'
     highlight! link CurSearch IncSearch
     highlight Italic guifg=NONE guibg=NONE guisp=NONE gui=italic cterm=italic
     highlight LineNr guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=NONE 
-    highlight LineNrAbove guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
-    highlight LineNrBelow guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
+    highlight LineNrAbove guifg=#333333 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
+    highlight LineNrBelow guifg=#333333 guibg=NONE guisp=NONE gui=NONE cterm=NONE 
     highlight! link CocCodeLens LineNr
     highlight! link LspCodeLens LineNr
     highlight! link SignColumn LineNr
@@ -156,7 +156,7 @@ if &background ==# 'dark'
     highlight! link Whitespace NonText
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link SnacksPickerBorder NormalFloat
-    highlight Number guifg=#868C91 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Number guifg=#8D9499 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link Float Number
     highlight Pmenu guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight PmenuSbar guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -186,13 +186,13 @@ if &background ==# 'dark'
     highlight! link FzfLuaBufName Statement
     highlight! link PreProc Statement
     highlight! link WhichKey Statement
-    highlight StatusLine guifg=#B4BDC3 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight StatusLine guifg=#444444 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link TabLine StatusLine
     highlight! link WinBar StatusLine
     highlight! link StatusLineNC StatusLine
     highlight! link TabLineFill StatusLineNC
     highlight! link WinBarNC StatusLineNC
-    highlight String guifg=#868C91 guibg=NONE guisp=NONE gui=italic cterm=italic
+    highlight String guifg=#8D9499 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight TabLineSel guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight! link BufferCurrent TabLineSel
     highlight Title guifg=#B4BDC3 guibg=NONE guisp=NONE gui=bold cterm=bold
@@ -207,6 +207,7 @@ if &background ==# 'dark'
     highlight! link markdownItalicDelimiter LineNrAbove
     highlight! link markdownBoldDelimiter LineNrAbove
     highlight! link markdownBoldItalicDelimiter LineNrAbove
+    highlight! link markdownRule LineNrAbove
     "highlight Operator guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=NONE
     highlight Underlined guifg=NONE guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight Visual guifg=NONE guibg=#3D4042 guisp=NONE gui=NONE cterm=NONE
@@ -490,7 +491,7 @@ else
     highlight DiagnosticVirtualTextWarn guifg=#944927 guibg=#EFDFDC guisp=NONE gui=NONE cterm=NONE
     highlight! link CocWarningVirtualText DiagnosticVirtualTextWarn
     highlight! link DiagnosticDeprecated DiagnosticWarn
-    highlight! link DiagnosticUnnecessary DiagnosticWarn
+    highlight! link DiagnosticUnnecessary Normal
     highlight! link NotifyWARNIcon DiagnosticWarn
     highlight! link NotifyWARNTitle DiagnosticWarn
     highlight DiffAdd guifg=NONE guibg=#CBE5B8 guisp=NONE gui=NONE cterm=NONE
@@ -552,7 +553,7 @@ else
     highlight! link Whitespace NonText
     highlight NormalFloat guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link SnacksPickerBorder NormalFloat
-    highlight Number guifg=#556570 guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight Number guifg=#8D9499 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link Float Number
     highlight Pmenu guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight PmenuSbar guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -582,13 +583,13 @@ else
     highlight! link FzfLuaBufName Statement
     highlight! link PreProc Statement
     highlight! link WhichKey Statement
-    highlight StatusLine guifg=#2C363C guibg=#D6CDC9 guisp=NONE gui=NONE cterm=NONE
+    highlight StatusLine guifg=#A4968F guibg=#D6CDC9 guisp=NONE gui=NONE cterm=NONE
     highlight! link TabLine StatusLine
     highlight! link WinBar StatusLine
     highlight StatusLineNC guifg=#596A76 guibg=#E1DCD9 guisp=NONE gui=NONE cterm=NONE
     highlight! link TabLineFill StatusLineNC
     highlight! link WinBarNC StatusLineNC
-    highlight String guifg=#556570 guibg=NONE guisp=NONE gui=italic cterm=italic
+    highlight String guifg=#8D9499 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight TabLineSel guifg=NONE guibg=NONE guisp=NONE gui=bold cterm=bold
     highlight! link BufferCurrent TabLineSel
     highlight Title guifg=#2C363C guibg=NONE guisp=NONE gui=bold cterm=bold

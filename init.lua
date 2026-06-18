@@ -22,6 +22,9 @@ vim.o.undofile = true
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
+    'https://github.com/idris-community/idris2-nvim',
+    'https://github.com/dgagn/diagflow.nvim',
+    'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/nvim-lua/plenary.nvim',
     'https://github.com/mason-org/mason.nvim',
     'https://github.com/neovim/nvim-lspconfig',
@@ -30,12 +33,19 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    'https://github.com/L3MON4D3/LuaSnip',
+    'https://github.com/MunifTanjim/nui.nvim'
+    -- 'https://github.com/Olical/conjure',
 })
 
 vim.cmd.colorscheme("myzenbones")
 
 require('mason').setup()
+require('idris2').setup({
+    autostart_semantic = false
+})
+
+
+require('diagflow').setup()
 
 require('oil').setup({
     delete_to_trash = true,
@@ -80,6 +90,7 @@ require('blink.cmp').setup({
 local map = vim.keymap.set
 map('n', '<leader>e', ':Oil<CR>')
 map('n', '<leader>ff', ':Pick files<CR>')
+map('n', '<leader>fb', ':Pick buffers<CR>')
 map('n', 'z=', ':Pick spellsuggest<CR>')
 map('n', '<leader>ot', '<C-w>v<C-w>l:term<CR>i')
 map('n', 'gre', vim.diagnostic.open_float)
@@ -88,7 +99,6 @@ map('n', 'grd', vim.lsp.buf.definition, { noremap = true, silent = true })
 map('n', '<leader>bn', ':bn<CR>')
 map('n', '<ESC>', ':nohl<CR>')
 map('n', '<leader>q', ':q!<CR>')
-map('n', '<leader>x', ':wq<CR>')
 map('n', '<leader>w', ':up<CR>')
 map('n', '<C-h>', '<C-w><C-h>')
 map('n', '<C-j>', '<C-w><C-j>')
@@ -98,23 +108,61 @@ map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 map('t', '<ESC>', '<C-\\><C-n>')
 map('n', '<leader>t', '<C-]>')
-map('n', '<leader>c', ':Comp<CR>')
-map('n', '<leader>C', ':Comp')
 
 local lsps = {
     'tinymist',
     'ocamllsp',
-    'hls',
     'pyright',
+    'hls',
     'ruff',
+    'clangd',
+    'rust_analyzer',
+    'revo',
+    'clojure_lsp',
+    'fennel_language_server'
 }
 
 vim.lsp.config('clangd', {
     cmd = { '/opt/homebrew/opt/llvm/bin/clangd' },
 })
 
+vim.lsp.config('rust_analyzer', {
+    assist = {
+        importEnforceGranularity = true,
+        importPrefix = 'crate',
+    },
+    cargo = {
+        allFeatures = true,
+    },
+    checkOnSave = {
+        command = 'clippy',
+    },
+    inlayHints = { locationLinks = false },
+    diagnostics = {
+        enable = true,
+        experimental = {
+            enable = true,
+        },
+    },
+})
+
+vim.lsp.config("hls", {
+    settings = {
+        haskell = {
+            formattingProvider = "ormolu",
+        },
+    },
+})
+
+vim.lsp.config("ocamllsp", {
+    settings = {
+        ocaml = {
+            formattingProvider = "ocamlformat",
+        },
+    },
+})
+
 for _, lsp in ipairs(lsps) do
-    vim.lsp.config(lsp, {})
     vim.lsp.enable(lsp)
 end
 
@@ -128,12 +176,12 @@ vim.api.nvim_create_autocmd('FileType', {
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if client then
-      client.server_capabilities.semanticTokensProvider = nil
-    end
-  end,
+    callback = function(ev)
+        local client = vim.lsp.get_client_by_id(ev.data.client_id)
+        if client then
+            client.server_capabilities.semanticTokensProvider = nil
+        end
+    end,
 })
 
 vim.api.nvim_create_user_command('Comp', function(opts)
@@ -144,4 +192,10 @@ vim.api.nvim_create_user_command('Comp', function(opts)
     vim.cmd('copen')
 end, {
 nargs = '*',
+})
+
+vim.filetype.add({
+    extension = {
+        rv = "revo",
+    },
 })

@@ -32,6 +32,10 @@
       "rev": "5663ddc9d8580c0c43b996e01bfe1a335789e9c9",
       "src": "https://github.com/stevedylandev/darkmatter-nvim"
     },
+    "diagflow.nvim": {
+      "rev": "b13321b517ff64bf42eeac2214085d3c76d83a0d",
+      "src": "https://github.com/dgagn/diagflow.nvim"
+    },
     "gruber-darker-vim": {
       "rev": "5f2cd5a9375873ce66d1b87ef00bac2bdff29356",
       "src": "https://github.com/drsooch/gruber-darker-vim"
@@ -68,6 +72,10 @@
       "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
       "src": "https://github.com/rktjmp/lush.nvim"
     },
+    "markdown-preview.nvim": {
+      "rev": "a923f5fc5ba36a3b17e289dc35dc17f66d0548ee",
+      "src": "https://github.com/iamcco/markdown-preview.nvim"
+    },
     "mason.nvim": {
       "rev": "44d1e90e1f66e077268191e3ee9d2ac97cc18e65",
       "src": "https://github.com/mason-org/mason.nvim"
@@ -88,9 +96,21 @@
       "rev": "8e3acd41bd7ee8f89967c83bacc93871b98a14aa",
       "src": "https://github.com/nvim-mini/mini.snippets"
     },
+    "no-clown-fiesta.nvim": {
+      "rev": "04b808e9769ded988089772ffcaf08d92d75d927",
+      "src": "https://github.com/aktersnurra/no-clown-fiesta.nvim"
+    },
     "nord.nvim": {
       "rev": "80c1e5321505aeb22b7a9f23eb82f1e193c12470",
       "src": "https://github.com/shaunsingh/nord.nvim"
+    },
+    "nui.nvim": {
+      "rev": "de740991c12411b663994b2860f1a4fd0937c130",
+      "src": "https://github.com/MunifTanjim/nui.nvim"
+    },
+    "nvim-helix-theme-converter": {
+      "rev": "7deae1347cf9d64af68f4efa73c3a3146d706ecd",
+      "src": "https://github.com/altermo/nvim-helix-theme-converter"
     },
     "nvim-lspconfig": {
       "rev": "41ceb6bba3a40128b7841f5b7f5a9dae7201e823",
@@ -119,6 +139,10 @@
     "silentium.nvim": {
       "rev": "86c1700f8899b74643852ab51db7ed2795c0242b",
       "src": "https://github.com/silentium-theme/silentium.nvim"
+    },
+    "thorn.nvim": {
+      "rev": "3653d1508e605fe87ec174e8c2ad0f36ce9844f3",
+      "src": "https://github.com/jpwol/thorn.nvim"
     },
     "typst-preview.nvim": {
       "rev": "e123a7ab64e52d836e00dea9251e85b201f38966",
