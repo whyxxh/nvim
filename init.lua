@@ -22,7 +22,6 @@ vim.o.undofile = true
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
-    'https://github.com/idris-community/idris2-nvim',
     'https://github.com/dgagn/diagflow.nvim',
     'https://github.com/nvim-treesitter/nvim-treesitter',
     'https://github.com/nvim-lua/plenary.nvim',
@@ -33,19 +32,19 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    'https://github.com/MunifTanjim/nui.nvim'
+    'https://github.com/WTFox/jellybeans.nvim',
+    'https://github.com/m4xshen/hardtime.nvim',
+    'https://github.com/MunifTanjim/nui.nvim',
+    'https://github.com/tris203/precognition.nvim',
     -- 'https://github.com/Olical/conjure',
 })
 
 vim.cmd.colorscheme("myzenbones")
-
 require('mason').setup()
-require('idris2').setup({
-    autostart_semantic = false
-})
-
-
 require('diagflow').setup()
+-- require('hardtime').setup()
+-- require('precognition').setup()
+-- require("precognition").hide()
 
 require('oil').setup({
     delete_to_trash = true,
@@ -89,6 +88,7 @@ require('blink.cmp').setup({
 
 local map = vim.keymap.set
 map('n', '<leader>e', ':Oil<CR>')
+map('n', '<leader>pp', ':Precognition toggle<CR>')
 map('n', '<leader>ff', ':Pick files<CR>')
 map('n', '<leader>fb', ':Pick buffers<CR>')
 map('n', 'z=', ':Pick spellsuggest<CR>')
@@ -107,7 +107,11 @@ map('n', '<C-l>', '<C-w><C-l>')
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 map('t', '<ESC>', '<C-\\><C-n>')
-map('n', '<leader>t', '<C-]>')
+vim.keymap.set("n", "<leader>t", function()
+    vim.cmd("belowright split")
+    vim.cmd("resize -5")
+    vim.cmd("terminal")
+end)
 
 local lsps = {
     'tinymist',
@@ -149,7 +153,7 @@ vim.lsp.config('rust_analyzer', {
 vim.lsp.config("hls", {
     settings = {
         haskell = {
-            formattingProvider = "ormolu",
+            formattingProvider = "fourmolu",
         },
     },
 })
@@ -194,8 +198,10 @@ end, {
 nargs = '*',
 })
 
-vim.filetype.add({
-    extension = {
-        rv = "revo",
-    },
+vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
+    callback = function()
+        vim.opt.guicursor = ""
+        io.write("\x1b[ q")
+        io.flush()
+    end,
 })
