@@ -40,6 +40,7 @@ vim.pack.add({
 })
 
 vim.cmd.colorscheme("myzenbones")
+
 require('mason').setup()
 require('diagflow').setup()
 -- require('hardtime').setup()
