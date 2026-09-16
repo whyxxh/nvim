@@ -1,0 +1,8 @@
+
+vim.api.nvim_set_hl(0, "LineNr", { bold = true, fg = nil })
+vim.api.nvim_set_hl(0, "LineNrAbove", { fg = "#333333" })
+vim.api.nvim_set_hl(0, "LineNrBelow", { fg = "#333333" })
+-- vim.api.nvim_set_hl(0, "@keyword", { fg = "#7e97ab", bold = true })
+vim.api.nvim_set_hl(0, "@punctuation.delimiter", { bold = true })
+vim.api.nvim_set_hl(0, "@operator", { bold = true })
+vim.api.nvim_set_hl(0, "@markup.list", { link = "markdownOrderedListMarker" })

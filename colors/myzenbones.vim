@@ -159,6 +159,7 @@ if &background ==# 'dark'
     highlight Number guifg=#8D9499 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link Float Number
     highlight Pmenu guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
+    highlight PmenuBorder guifg=#333333 guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight PmenuSbar guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
     highlight! link PmenuSel CursorLine
     highlight PmenuThumb guifg=NONE guibg=NONE guisp=NONE gui=NONE cterm=NONE
@@ -228,7 +229,9 @@ if &background ==# 'dark'
     highlight helpHyperTextJump guifg=#979FA4 guibg=NONE guisp=NONE gui=underline cterm=underline
     highlight lCursor guifg=NONE guibg=#797F84 guisp=NONE gui=NONE cterm=NONE
     highlight! link TermCursorNC lCursor
+    highlight! link BlinkCmpMenuBorder PmenuBorder
     highlight markdownLinkText guifg=#979FA4 guibg=NONE guisp=NONE gui=underline cterm=underline
+
     " Tree-sitter
     highlight! link @variable                      Identifier
     highlight! link @variable.builtin              Constant

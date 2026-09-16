@@ -40,9 +40,9 @@
       "rev": "5f2cd5a9375873ce66d1b87ef00bac2bdff29356",
       "src": "https://github.com/drsooch/gruber-darker-vim"
     },
-    "gruber-darker.nvim": {
-      "rev": "6615b4ac1fe77a3f4f8168ba1d4a9f2fff0d8d55",
-      "src": "https://github.com/blazkowolf/gruber-darker.nvim"
+    "gruber-darker.vim": {
+      "rev": "22dbf46d8a1925b2021476761bf11d8e3e70fe5c",
+      "src": "https://github.com/ThunderBoltCODMYT/gruber-darker.vim"
     },
     "hardtime.nvim": {
       "rev": "b4e431934af1fe224a3a801f632c008278cb7628",
@@ -63,6 +63,10 @@
     "jellybeans.nvim": {
       "rev": "28b80886b54396b13a2a85edf608926333e842b9",
       "src": "https://github.com/WTFox/jellybeans.nvim"
+    },
+    "kanso.nvim": {
+      "rev": "1afbbb449aa0254823dbe1932e3cbb51886ff9fe",
+      "src": "https://github.com/webhooked/kanso.nvim"
     },
     "kintsugi-nvim": {
       "rev": "6c8b881e6aea8ee1e3361a00858b5b1a3488d885",

@@ -19,6 +19,7 @@ vim.o.updatetime = 300
 vim.o.winborder = 'rounded'
 vim.o.undofile = true
 
+
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
@@ -32,20 +33,19 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.pick',
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
-    'https://github.com/WTFox/jellybeans.nvim',
-    'https://github.com/m4xshen/hardtime.nvim',
     'https://github.com/MunifTanjim/nui.nvim',
-    'https://github.com/tris203/precognition.nvim',
-    -- 'https://github.com/Olical/conjure',
+    'https://github.com/webhooked/kanso.nvim',
+    'https://github.com/azratul/live-share.nvim',
 })
 
 vim.cmd.colorscheme("myzenbones")
+-- vim.api.nvim_set_hl(0, "Normal", {bg = nil})
 
 require('mason').setup()
-require('diagflow').setup()
--- require('hardtime').setup()
--- require('precognition').setup()
--- require("precognition").hide()
+require('diagflow').setup({
+    scope = 'line',
+    gap_size = 2,
+})
 
 require('oil').setup({
     delete_to_trash = true,
@@ -205,4 +205,20 @@ vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
         io.write("\x1b[ q")
         io.flush()
     end,
+})
+
+require('vim._core.ui2').enable({
+    enable = true, 
+    msg = { 
+        targets = 'cmd',
+        dialog = { 
+            height = 0.5, 
+        },
+        msg = { 
+            height = 0.5, 
+        },
+        pager = { 
+            height = 0.999, 
+        },
+    },
 })
