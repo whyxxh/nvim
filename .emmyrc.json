@@ -1,0 +1,24 @@
+{
+  "runtime": {
+    "version": "LuaJIT", <--- the version nvim uses
+    "requirePattern": [
+      "lua/?.lua",
+      "lua/?/init.lua",
+      "?/lua/?.lua",    <--- this allows plugins to be loaded
+      "?/lua/?/init.lua"
+    ]
+  },
+  "workspace": {
+    "library": [
+      "$VIMRUNTIME",        <--- for vim.*
+      "$LLS_Addons/luvit",  <--- for vim.uv.* 
+                             (should not be needed in future from what I hear. 
+                             I just set $LLS_Addons in my .zshrc to the dir where I
+                             recursively cloned https://github.com/LuaLS/LLS-Addons)
+      "$HOME/.local/share/nvim/lazy"   <--- plugins dir, change to something else if
+                                       you don't use lazy.nvim
+    ],
+    "ignoreGlobs": ["**/*_spec.lua"]   <--- to avoid some weird type defs in a plugin 
+                                          
+  }
+}

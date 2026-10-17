@@ -80,6 +80,10 @@
       "rev": "904dcc2787effac5e0394a46e78499b2c094a3df",
       "src": "https://github.com/Julian/lean.nvim"
     },
+    "live-share.nvim": {
+      "rev": "dae9c34025d070984953df73ed449fffa23d9463",
+      "src": "https://github.com/azratul/live-share.nvim"
+    },
     "lush.nvim": {
       "rev": "9c60ec2279d62487d942ce095e49006af28eed6e",
       "src": "https://github.com/rktjmp/lush.nvim"
@@ -171,6 +175,10 @@
     "vim-jack-in": {
       "rev": "45e5293cff0802a51dbed31a9b0141b0f80e2952",
       "src": "https://github.com/clojure-vim/vim-jack-in"
+    },
+    "vim-surround": {
+      "rev": "3d188ed2113431cf8dac77be61b842acb64433d9",
+      "src": "https://github.com/tpope/vim-surround"
     },
     "y9nika.nvim": {
       "rev": "98cb5a1dd79d2aa8655b8000e8933f588d2786b0",

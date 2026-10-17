@@ -19,7 +19,6 @@ vim.o.updatetime = 300
 vim.o.winborder = 'rounded'
 vim.o.undofile = true
 
-
 vim.diagnostic.config({ virtual_text = { current_line = true } })
 
 vim.pack.add({
@@ -34,68 +33,67 @@ vim.pack.add({
     'https://github.com/nvim-mini/mini.extra',
     'https://github.com/Saghen/blink.cmp',
     'https://github.com/MunifTanjim/nui.nvim',
-    'https://github.com/webhooked/kanso.nvim',
-    'https://github.com/azratul/live-share.nvim',
+    'https://github.com/tpope/vim-surround',
+    'https://github.com/Olical/conjure',
 })
 
 vim.cmd.colorscheme("myzenbones")
--- vim.api.nvim_set_hl(0, "Normal", {bg = nil})
 
 require('mason').setup()
 require('diagflow').setup({
     scope = 'line',
-    gap_size = 2,
+    gap_size = 2
 })
 
 require('oil').setup({
     delete_to_trash = true,
     skip_confirm_for_simple_edits = true,
-    view_options = { show_hidden = true, natural_order = true, },
-    columns = { 
-        'icon',
-    },
+    view_options = { show_hidden = true, natural_order = true },
+    columns = {
+        'icon'
+    }
 })
 
 require('mini.extra').setup({})
 require('mini.pick').setup({
     source = { show = require('mini.pick').default_show },
-    window = { prompt_prefix = ' > ', },
+    window = { prompt_prefix = ' > ' }
 })
 
 require('blink.cmp').setup({
     signature = { enabled = true },
     keymap = { preset = 'enter' },
-    fuzzy = { implementation = 'lua', },
+    fuzzy = { implementation = 'lua' },
     completion = {
         menu = {
             scrollbar = false,
             auto_show = true,
             draw = {
                 treesitter = { 'lsp' },
-                columns = { { 'label', 'label_description', gap = 1 } },
-            },
-        },
+                columns = { { 'label', 'label_description', gap = 1 } }
+            }
+        }
     },
     sources = {
         providers = {
             buffer = {
                 opts = {
-                    get_bufnrs = vim.api.nvim_list_bufs,  -- include all loaded buffers
-                },
-            },
-        },
-    },
+                    get_bufnrs = vim.api.nvim_list_bufs -- include all loaded buffers
+                }
+            }
+        }
+    }
 })
 
 local map = vim.keymap.set
-map('n', '<leader>e', ':Oil<CR>')
+map('n', '<leader>o', ':Oil<CR>')
 map('n', '<leader>pp', ':Precognition toggle<CR>')
 map('n', '<leader>ff', ':Pick files<CR>')
 map('n', '<leader>fb', ':Pick buffers<CR>')
 map('n', 'z=', ':Pick spellsuggest<CR>')
-map('n', '<leader>ot', '<C-w>v<C-w>l:term<CR>i')
+-- map('n', '<leader>ot', '<C-w>v<C-w>l:term<CR>i')
 map('n', 'gre', vim.diagnostic.open_float)
-map('n', 'grf',  vim.lsp.buf.format)
+map('n', 'grf', vim.lsp.buf.format)
 map('n', 'grd', vim.lsp.buf.definition, { noremap = true, silent = true })
 map('n', '<leader>bn', ':bn<CR>')
 map('n', '<ESC>', ':nohl<CR>')
@@ -108,7 +106,7 @@ map('n', '<C-l>', '<C-w><C-l>')
 map('n', 'n', 'nzzzv')
 map('n', 'N', 'Nzzzv')
 map('t', '<ESC>', '<C-\\><C-n>')
-vim.keymap.set("n", "<leader>t", function()
+vim.keymap.set("n", "<leader>t", function ()
     vim.cmd("belowright split")
     vim.cmd("resize -5")
     vim.cmd("terminal")
@@ -116,55 +114,55 @@ end)
 
 local lsps = {
     'tinymist',
+    'emmylua_ls',
     'ocamllsp',
     'pyright',
     'hls',
     'ruff',
     'clangd',
     'rust_analyzer',
-    'revo',
     'clojure_lsp',
     'fennel_language_server'
 }
 
 vim.lsp.config('clangd', {
-    cmd = { '/opt/homebrew/opt/llvm/bin/clangd' },
+    cmd = { '/opt/homebrew/opt/llvm/bin/clangd' }
 })
 
 vim.lsp.config('rust_analyzer', {
     assist = {
         importEnforceGranularity = true,
-        importPrefix = 'crate',
+        importPrefix = 'crate'
     },
     cargo = {
-        allFeatures = true,
+        allFeatures = true
     },
     checkOnSave = {
-        command = 'clippy',
+        command = 'clippy'
     },
     inlayHints = { locationLinks = false },
     diagnostics = {
         enable = true,
         experimental = {
-            enable = true,
-        },
-    },
+            enable = true
+        }
+    }
 })
 
 vim.lsp.config("hls", {
     settings = {
         haskell = {
-            formattingProvider = "fourmolu",
-        },
-    },
+            formattingProvider = "fourmolu"
+        }
+    }
 })
 
 vim.lsp.config("ocamllsp", {
     settings = {
         ocaml = {
-            formattingProvider = "ocamlformat",
-        },
-    },
+            formattingProvider = "ocamlformat"
+        }
+    }
 })
 
 for _, lsp in ipairs(lsps) do
@@ -173,52 +171,54 @@ end
 
 vim.api.nvim_create_autocmd('FileType', {
     pattern = '*',
-    callback = function(args)
-        if vim.bo[args.buf].filetype ~= 'markdown' then
-            pcall(vim.treesitter.start, args.buf)
-        end
-    end,
+    callback = function (args)
+        pcall(vim.treesitter.start, args.buf)
+    end
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
-    callback = function(ev)
+    callback = function (ev)
         local client = vim.lsp.get_client_by_id(ev.data.client_id)
         if client then
             client.server_capabilities.semanticTokensProvider = nil
         end
-    end,
+    end
 })
 
-vim.api.nvim_create_user_command('Comp', function(opts)
-    if opts.args ~= '' then
-        vim.opt.makeprg = opts.args
-    end
-    vim.cmd('silent make!')
-    vim.cmd('copen')
-end, {
-nargs = '*',
-})
+vim.api.nvim_create_user_command(
+    'Comp',
+    function (opts)
+        if opts.args ~= '' then
+            vim.opt.makeprg = opts.args
+        end
+        vim.cmd('silent make!')
+        vim.cmd('copen')
+    end,
+    {
+        nargs = '*'
+    }
+)
 
 vim.api.nvim_create_autocmd({ "VimLeave", "VimSuspend" }, {
-    callback = function()
+    callback = function ()
         vim.opt.guicursor = ""
         io.write("\x1b[ q")
         io.flush()
-    end,
+    end
 })
 
 require('vim._core.ui2').enable({
-    enable = true, 
-    msg = { 
+    enable = true,
+    msg = {
         targets = 'cmd',
-        dialog = { 
-            height = 0.5, 
+        dialog = {
+            height = 0.5
         },
-        msg = { 
-            height = 0.5, 
+        msg = {
+            height = 0.5
         },
-        pager = { 
-            height = 0.999, 
-        },
-    },
+        pager = {
+            height = 0.999
+        }
+    }
 })
